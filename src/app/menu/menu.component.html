@@ -10,7 +10,7 @@
   </div>
 
   <div fxFlex>
-    <md-grid-list cols="2" rowHeight = {{_rowHeight}}>
+    <md-grid-list cols="2" rowHeight = "200px">
       <md-grid-tile *ngFor="let dish of dishes">
         <img height="200px" src={{dish.image}} alt={{dish.name}}>
         <md-grid-tile-footer>
@@ -20,23 +20,6 @@
     </md-grid-list>
   </div>
 
-  <div fxFlex *ngIf="selectedDish">
-    <md-card>
-      <md-card-header>
-        <md-card-title>
-          <h3>{{selectedDish.name | uppercase}}</h3>
-        </md-card-title>
-      </md-card-header>
-      <img md-card-image src={{selectedDish.image}} alt={{selectedDish.name}}>
-      <md-card-content>
-        <p>{{selectedDish.description}}
-        </p>
-      </md-card-content>
-      <md-card-actions>
-        <button md-button>LIKE</button>
-        <button md-button>SHARE</button>
-      </md-card-actions>
-    </md-card>
-  </div>
-  
+  <app-dishdetail></app-dishdetail>
+
 </div>

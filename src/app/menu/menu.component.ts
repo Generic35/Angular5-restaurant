@@ -36,8 +36,6 @@ const DISHES: Dish[] = [
   }
  ];
 
-const _rowHeight: string = "200px";
-
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
