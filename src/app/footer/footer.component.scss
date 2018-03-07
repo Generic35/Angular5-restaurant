@@ -3,6 +3,7 @@ $background-dark: #512DA8;
 $background-light: #9575CD;
 $background-pale: #D1C4E9;
 
+
 @mixin zero-margin($pad-up-down, $pad-left-right) {
     margin: 0px auto;
     padding: $pad-up-down $pad-left-right;
@@ -11,6 +12,10 @@ $background-pale: #D1C4E9;
 .footer{
     background-color: $background-pale;
     @include zero-margin(20px, 0px);
+}
+
+a.active {
+    color: $background-dark;
 }
 
 .btn-facebook {color:#fff!important; background-color:#3b5998!important;}

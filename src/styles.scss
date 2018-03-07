@@ -28,6 +28,12 @@ body {
     display:flex;
 }
 
+.cards-container {
+  margin: 20px;
+  display:flex;
+  align-items:initial !important;
+}
+
 @mixin zero-margin($pad-up-down, $pad-left-right) {
   margin: 0px auto;
   padding: $pad-up-down $pad-left-right;
