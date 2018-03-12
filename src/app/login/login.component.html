@@ -4,16 +4,28 @@
   <button md-button md-dialog-close>&times;</button>
 </md-toolbar>
 
-<p>{{ user | json }}</p>
+<p>{{ !username.errors?.required | json }}</p>
 
-<form novalidate (ngSubmit)="onSubmit()">
+<form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
   <md-dialog-content>
     <p>
-      <md-input-container>
-        <input mdInput placeholder="Username" type="text" [(ngModel)]="user.username" required name="username" />
+      <md-input-container dividerColor="{{username.invalid && !username.pristine ? 'warn' : 'primary'}}">
+        <input mdInput placeholder="Username" type="text" [(ngModel)]="user.username" required name="username" #username="ngModel"
+        />
+        <md-hint>
+          <span [hidden]="username.pristine">
+            <span [hidden]="!username.errors?.required">username is required</span>
+          </span>
+        </md-hint>
       </md-input-container>
-      <md-input-container>
-        <input mdInput placeholder="Password" type="password" [(ngModel)]="user.password" required name="password" />
+      <md-input-container dividerColor="{{password.invalid && !password.pristine ? 'warn' : 'primary'}}">
+        <input mdInput placeholder="Password" type="password" [(ngModel)]="user.password" required name="password" #password="ngModel"
+        />
+        <md-hint>
+          <span [hidden]="password.pristine">
+            <span [hidden]="!password.errors?.required">username is required</span>
+          </span>
+        </md-hint>
       </md-input-container>
       <md-checkbox name="remember" [(ngModel)]="user.remember">
         Remember Me
@@ -23,6 +35,10 @@
   <md-dialog-actions>
     <span class="flex-spacer"></span>
     <button md-button md-dialog-close>Cancel</button>
-    <button md-button type="submit" class="background-primary text-floral-white">Login</button>
+    <button md-button type="submit" 
+      [disabled]="loginForm.form.invalid" 
+      class="background-primary text-floral-white">
+      Login
+    </button>
   </md-dialog-actions>
 </form>
