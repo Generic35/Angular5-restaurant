@@ -4,10 +4,19 @@
   <button md-button md-dialog-close>&times;</button>
 </md-toolbar>
 
+<p>{{ user | json }}</p>
+
+
 <form novalidate>
   <p>
     <md-input-container>
-      <input mdInput placeholder="Username" type="text" required/>
+      <input mdInput placeholder="Username" type="text" [(ngModel)]="user.username" required name="username"/>
     </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Password" type="password" [(ngModel)]="user.password" required name="password"/>
+    </md-input-container>
+    <md-checkbox name="remember" [(ngModel)]="user.remember">
+      Remember Me
+    </md-checkbox>
   </p>
 </form>
