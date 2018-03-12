@@ -6,17 +6,23 @@
 
 <p>{{ user | json }}</p>
 
-
-<form novalidate>
-  <p>
-    <md-input-container>
-      <input mdInput placeholder="Username" type="text" [(ngModel)]="user.username" required name="username"/>
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Password" type="password" [(ngModel)]="user.password" required name="password"/>
-    </md-input-container>
-    <md-checkbox name="remember" [(ngModel)]="user.remember">
-      Remember Me
-    </md-checkbox>
-  </p>
+<form novalidate (ngSubmit)="onSubmit()">
+  <md-dialog-content>
+    <p>
+      <md-input-container>
+        <input mdInput placeholder="Username" type="text" [(ngModel)]="user.username" required name="username" />
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="Password" type="password" [(ngModel)]="user.password" required name="password" />
+      </md-input-container>
+      <md-checkbox name="remember" [(ngModel)]="user.remember">
+        Remember Me
+      </md-checkbox>
+    </p>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <span class="flex-spacer"></span>
+    <button md-button md-dialog-close>Cancel</button>
+    <button md-button type="submit" class="background-primary text-floral-white">Login</button>
+  </md-dialog-actions>
 </form>

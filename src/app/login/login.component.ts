@@ -9,8 +9,13 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 export class LoginComponent implements OnInit {
 
   user = { remember: false };
-  constructor() { }
+  constructor(public dialogRef: MdDialogRef<LoginComponent>) { }
 
   ngOnInit() {
+  }
+
+  onSubmit(){
+    console.log("user : ", this.user);
+    this.dialogRef.close();
   }
 }
