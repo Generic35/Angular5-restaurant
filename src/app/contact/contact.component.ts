@@ -9,7 +9,7 @@ import { Feedback, ContactType } from '../shared/feedback';
 })
 export class ContactComponent implements OnInit {
   
-  public formGroup: FormGroup;
+  public feedbackForm: FormGroup;
   public feedback: Feedback;
   public contactType = ContactType;
 
@@ -21,6 +21,20 @@ export class ContactComponent implements OnInit {
   }
 
   createForm(): any {
-    throw new Error("Method not implemented.");
+    this.feedbackForm = this.fb.group({
+      firstname: '',
+      lastname: '',
+      telnum: 0,
+      email: '',
+      agree: false,
+      contacttype: 'None',
+      message: ''
+    });
+  }
+
+  onSubmit(){
+    this.feedback = this.feedbackForm.value;
+    console.log(this.feedbackForm.value, ' ', this.feedbackForm.status);
+    this.feedbackForm.reset();
   }
 }
