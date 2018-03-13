@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Feedback, ContactType } from '../shared/feedback';
 
 @Component({
   selector: 'app-contact',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
+  
+  public formGroup: FormGroup;
+  public feedback: Feedback;
+  public contactType = ContactType;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { 
+    this.createForm();
+  }
 
   ngOnInit() {
   }
 
+  createForm(): any {
+    throw new Error("Method not implemented.");
+  }
 }
