@@ -17,7 +17,8 @@ export const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'menu', component: MenuComponent
+    path: 'menu', 
+    component: MenuComponent
   },
   {
     path: 'dishdetail/:id',

@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div fxFlex>
+  <div fxFlex *ngIf="dishes">
     <md-grid-list cols="2" rowHeight = "200px">
       <!-- md-grid-tile *ngFor="let dish of dishes" (click) = "onSelect(dish)" -->
       <md-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
@@ -20,7 +20,9 @@
       </md-grid-tile>
     </md-grid-list>
   </div>
-
+  <div [hidden]="dishes">
+      <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
   <!-- app-dishdetail [dish] = "selectedDish"></app-dishdetail -->
 
 </div>
