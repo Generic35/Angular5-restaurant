@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import 'rxjs/add/operator/switchMap';
 
+import { Comment } from '../shared/comment';
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 
@@ -20,10 +21,11 @@ export class DishdetailComponent implements OnInit {
   commentForm: FormGroup;
   dish: Dish;
   dishIds: number[];
-  formErrors = {
-    author: '',
-    comment: '',
-    rating: ''
+
+  formErrors: any = {
+    author: 'sdfs',
+    comment: 'sdf',
+    rating: 'sdf'
   };
 
   validationMessages = {
@@ -44,8 +46,9 @@ export class DishdetailComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private location: Location) {
+
     this.commentForm = this.fb.group({
-      author: ['', [ Validators.required, Validators.minLength(2) ]],
+      author: ['', [Validators.required, Validators.minLength(2)]],
       rating: 5,
       comment: ''
     });
@@ -59,7 +62,6 @@ export class DishdetailComponent implements OnInit {
 
   ngOnInit() {
 
-
     this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
 
     this.route.params.switchMap((params: Params) =>
@@ -68,6 +70,8 @@ export class DishdetailComponent implements OnInit {
         this.dish = dish;
         this.setPrevNext(dish.id);
       });
+
+      console.log(this.commentForm.value, ' ', this.commentForm.status, this.formErrors);
   }
 
   goBack(): void {
@@ -95,6 +99,30 @@ export class DishdetailComponent implements OnInit {
   }
 
   onSubmit() {
+    const submitedComment: Comment = {
+      author: this.commentForm.get('author').value,
+      rating: this.commentForm.get('rating').value,
+      comment: this.commentForm.get('comment').value,
+      date: new Date().toISOString(),
+    }
 
+    this.dish.comments.push(submitedComment)
+    console.log(this.commentForm.value, ' ', this.commentForm.status, this.formErrors);
+
+    this.commentForm.reset({
+      author: '',
+      rating: 5,
+      comment: ''
+    })
+    
+    console.log(this.commentForm.value, ' ', this.commentForm.status, this.formErrors);
+  }
+
+  private resetFormErrors() {
+    this.formErrors = {
+      author: '',
+      comment: '',
+      rating: ''
+    }
   }
 }

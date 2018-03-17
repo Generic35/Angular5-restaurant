@@ -41,9 +41,15 @@
           <p md-line>{{comment.rating}} Stars</p>
           <p md-line>-- {{comment.author}} {{comment.date | date}}</p>
         </md-list-item>
+
+        <md-list-item *ngIf="commentForm.valid">
+          <p md-line>{{ commentForm.get('comment').value }}</p>
+          <p md-line>{{ commentForm.get('rating').value }} Stars</p>
+          <p md-line>-- {{ commentForm.get('author').value }}</p>
+        </md-list-item>
       </md-list>
     </div>
-    {{ formErrors | json }}
+    
     <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
         <md-input-container class="as-block-element" dividerColor="{{(formErrors.author) ? 'warn' : 'primary'}}">
           <input mdInput formControlName="author" placeholder="Name" type="text" required>
