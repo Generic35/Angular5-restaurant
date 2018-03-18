@@ -6,29 +6,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import 'rxjs/add/operator/switchMap';
 
+import { baseURL } from '../shared/baseurl';
 import { Comment } from '../shared/comment';
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
-import { baseURL } from '../shared/baseurl';
+import { visibility } from '../animations/app.animations';
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
   styleUrls: ['./dishdetail.component.scss'],
   animations: [
-    trigger(
-      'visibility', [
-        state('show', style({
-          transform: 'scale(1)',
-          opacity: 1
-        })),
-        state('hidden', style({
-          transform: 'scale(0.5)',
-          opacity: 0
-        })),
-        transition("* => *", animate('0.5s ease-in-out'))
-      ]
-    )
+    visibility()
   ]
 })
 
