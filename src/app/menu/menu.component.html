@@ -13,7 +13,7 @@
     <md-grid-list cols="2" rowHeight = "200px">
       <!-- md-grid-tile *ngFor="let dish of dishes" (click) = "onSelect(dish)" -->
       <md-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
-        <img height="200px" src={{dish.image}} alt={{dish.name}}>
+        <img height="200px" src="{{BaseURL + dish.image}}" alt={{dish.name}}>
         <md-grid-tile-footer>
           <h1 md-line>{{dish.name | uppercase}}</h1>
         </md-grid-tile-footer>
