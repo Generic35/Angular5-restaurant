@@ -1,4 +1,3 @@
-import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Location } from '@angular/common';
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
