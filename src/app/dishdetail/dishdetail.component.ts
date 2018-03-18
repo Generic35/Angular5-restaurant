@@ -1,3 +1,4 @@
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Location } from '@angular/common';
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
@@ -13,7 +14,22 @@ import { baseURL } from '../shared/baseurl';
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
-  styleUrls: ['./dishdetail.component.scss']
+  styleUrls: ['./dishdetail.component.scss'],
+  animations: [
+    trigger(
+      'visibility', [
+        state('show', style({
+          transform: 'scale(1)',
+          opacity: 1
+        })),
+        state('hidden', style({
+          transform: 'scale(0.5)',
+          opacity: 0
+        })),
+        transition("* => *", animate('0.5s ease-in-out'))
+      ]
+    )
+  ]
 })
 
 export class DishdetailComponent implements OnInit {
@@ -23,6 +39,7 @@ export class DishdetailComponent implements OnInit {
   dish: Dish;
   dishCopy: any = null;
   dishIds: number[];
+  visibility = 'shown';
 
   formErrors: any = {
     author: 'sdfs',
@@ -68,15 +85,17 @@ export class DishdetailComponent implements OnInit {
 
     this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
 
-    this.route.params.switchMap((params: Params) =>
-      this.dishservice.getDish(+params['id']))
-      .subscribe((dish) => {
-        this.dish = dish;
-        this.dishCopy = dish;
-        this.setPrevNext(dish.id);
-      });
+    this.route.params.switchMap((params: Params) => {
+      this.visibility = 'hidden';
+      return this.dishservice.getDish(+params['id'])
+    }).subscribe((dish) => {
+      this.dish = dish;
+      this.dishCopy = dish;
+      this.setPrevNext(dish.id);
+      this.visibility = 'shown';
+    });
 
-      console.log(this.commentForm.value, ' ', this.commentForm.status, this.formErrors);
+    console.log(this.commentForm.value, ' ', this.commentForm.status, this.formErrors);
   }
 
   goBack(): void {
@@ -123,7 +142,7 @@ export class DishdetailComponent implements OnInit {
       rating: 5,
       comment: ''
     })
-    
+
     console.log(this.commentForm.value, ' ', this.commentForm.status, this.formErrors);
   }
 
