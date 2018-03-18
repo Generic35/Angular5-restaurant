@@ -9,14 +9,15 @@ import { baseURL } from '../shared/baseurl';
 import { Comment } from '../shared/comment';
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
-import { visibility } from '../animations/app.animations';
+import { visibility, expand } from '../animations/app.animations';
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
   styleUrls: ['./dishdetail.component.scss'],
   animations: [
-    visibility()
+    visibility(),
+    expand()
   ]
 })
 
