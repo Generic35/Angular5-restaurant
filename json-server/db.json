@@ -45,6 +45,12 @@
           "rating": 5,
           "comment": "AAA",
           "date": "2018-03-18T16:49:48.857Z"
+        },
+        {
+          "author": "Test Author",
+          "rating": 5,
+          "comment": "Test Comment",
+          "date": "2018-03-19T17:47:14.939Z"
         }
       ]
     },
