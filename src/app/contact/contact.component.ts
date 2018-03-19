@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
 import { flyInOut } from '../animations/app.animations';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
@@ -48,7 +49,7 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private fs: FeedbackService) {
     this.createForm();
   }
 
@@ -75,7 +76,19 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.feedback = this.feedbackForm.value;
-    console.log(this.feedbackForm.value, ' ', this.feedbackForm.status);
+
+    let fb: Feedback = {
+      firstname: this.feedbackForm.get('firstname').value,
+      lastname: this.feedbackForm.get('lastname').value,
+      telnum: this.feedbackForm.get('telnum').value,
+      email: this.feedbackForm.get('email').value,
+      agree: this.feedbackForm.get('agree').value,
+      contacttype: this.feedbackForm.get('contacttype').value,
+      message: this.feedbackForm.get('message').value
+    }
+
+    this.fs.submitFeedback(fb);
+    
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
@@ -85,6 +98,7 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: ''
     });
+
   }
 
   onValueChanged(data?: any): any {
