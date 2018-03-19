@@ -41,6 +41,6 @@ export class HomeComponent implements OnInit {
       this.promotion = promotion;
     }, error => { console.error('An error occured while retrieving featured promotions, the system reports : ', error)});
 
-    this.leader = this.leaderservice.getFeaturedLeader();
+    this.leaderservice.getFeaturedLeader().subscribe(leader => { this.leader = leader }, err => { console.error(err) });
   }
 }
