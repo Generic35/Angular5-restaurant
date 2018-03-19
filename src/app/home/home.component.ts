@@ -37,8 +37,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.dishservice.getFeaturedDish().subscribe((dish) => { this.dish = dish });
-    this.promotion = this.promotionservice.getFeaturedPromotion();
+    this.promotionservice.getFeaturedPromotion().subscribe(promotion => {
+      this.promotion = promotion;
+    }, error => { console.error('An error occured while retrieving featured promotions, the system reports : ', error)});
+
     this.leader = this.leaderservice.getFeaturedLeader();
   }
-
 }
